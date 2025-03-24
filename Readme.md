@@ -1,1 +1,1 @@
-the sudo password is maker
+The sudo password is maker for the ev3 linux terminal
