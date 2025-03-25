@@ -24,11 +24,18 @@ AXLE_TRACK = 150 # this is in mm
 
 robot = DriveBase(left_motor, right_motor, WHEEL_DIAMETER, AXLE_TRACK)
 
-# settings(straight_speed, straight_acceleration, turn_rate, turn_acceleration)
-# straight_speed (speed: mm/s) – Speed of the robot during straight().
-# straight_acceleration (linear acceleration: mm/s/s) – Acceleration and deceleration of the robot at the start and end of straight().
-# turn_rate (rotational speed: deg/s) – Turn rate of the robot during turn().
-# turn_acceleration (rotational acceleration: deg/s/s) – Angular acceleration and deceleration of the robot at the start and end of turn().
+# draws a shape based on the number of sides 1 and 2 will not work
+def shapes(numberOfSides, lengthOfSides, speed):
+    if numberOfSides < 3:
+        pass
+    else:
+        angle: float = 180 - ((180 * ((numberOfSides) - 2))/ 2)
+        for _ in range(numberOfSides):
+            move(lengthOfSides, 0, speed)
+            move(0, angle, speed)
+        
 
-robot.settings(1,1,1,1) # sets the onfiguration of the motor speeds
-
+def move(forward, turn, speed):
+    robot.straight(forward * speed)
+    robot.turn(turn * speed)
+    robot.stop()
